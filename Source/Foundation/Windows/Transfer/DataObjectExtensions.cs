@@ -174,7 +174,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Transfer
 
                 try
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     storage = (IStorage)Marshal.GetObjectForIUnknown(medium.unionmember);
+#pragma warning restore CA1416 // Validate platform compatibility
                     Marshal.Release(medium.unionmember);
 
                     NativeMethods.StgCreateDocfile(targetFileName, (uint)(STGM.STGM_READWRITE | STGM.STGM_SHARE_EXCLUSIVE), 0, out storageOutput);
@@ -187,13 +189,19 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Transfer
                 }
                 finally
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     if (storage != null) { Marshal.ReleaseComObject(storage); }
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                     if (storageOutput != null) { Marshal.ReleaseComObject(storageOutput); }
+#pragma warning restore CA1416 // Validate platform compatibility
                 }
             }
             else
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 IStream stream = (IStream)Marshal.GetObjectForIUnknown(medium.unionmember);
+#pragma warning restore CA1416 // Validate platform compatibility
                 Marshal.Release(medium.unionmember);
 
                 using (StreamAdapter streamAdapter = new StreamAdapter(stream))

@@ -544,7 +544,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Native
         internal void SetIUnknown(object value)
         {
             _valueType = (ushort)VarEnum.VT_UNKNOWN;
+#pragma warning disable CA1416 // Validate platform compatibility
             _ptr = Marshal.GetIUnknownForObject(value);
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
 
@@ -564,7 +566,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Native
                 for (int i = 0; i < array.Length; ++i)
                 {
                     object obj = array.GetValue(i);
+#pragma warning disable CA1416 // Validate platform compatibility
                     IntPtr punk = (obj != null) ? Marshal.GetIUnknownForObject(obj) : IntPtr.Zero;
+#pragma warning restore CA1416 // Validate platform compatibility
                     Marshal.WriteIntPtr(pvData, i * IntPtr.Size, punk);
                 }
             }
@@ -652,9 +656,13 @@ namespace Microsoft.Tools.TeamMate.Foundation.Native
                     case VarEnum.VT_LPWSTR:
                         return Marshal.PtrToStringUni(_ptr);
                     case VarEnum.VT_UNKNOWN:
+#pragma warning disable CA1416 // Validate platform compatibility
                         return Marshal.GetObjectForIUnknown(_ptr);
+#pragma warning restore CA1416 // Validate platform compatibility
                     case VarEnum.VT_DISPATCH:
+#pragma warning disable CA1416 // Validate platform compatibility
                         return Marshal.GetObjectForIUnknown(_ptr);
+#pragma warning restore CA1416 // Validate platform compatibility
                     case VarEnum.VT_DECIMAL:
                         return _decimal;
                     case VarEnum.VT_ARRAY | VarEnum.VT_UNKNOWN:

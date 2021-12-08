@@ -96,7 +96,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Shell
 
             try
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 eventWaitHandle = EventWaitHandle.OpenExisting(GetEventName(applicationName));
+#pragma warning restore CA1416 // Validate platform compatibility
 
                 mailslotHandle = NativeMethods.CreateFile(GetMailslotName(applicationName),
                     (uint)FileAccess.Write, (uint)FileShare.Read, 0, (uint)FileMode.Open, (uint)FileAttributes.Normal, 0);
@@ -261,12 +263,28 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Shell
             // freely.
 
             // Initialize security access rule allowing full control to the current user
+#pragma warning disable CA1416 // Validate platform compatibility
             FileSecurity security = new FileSecurity();
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             var currentUser = WindowsIdentity.GetCurrent().User;
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             security.AddAccessRule(new FileSystemAccessRule(currentUser, FileSystemRights.FullControl, AccessControlType.Allow));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
 
             // Marshal this to the native world
+#pragma warning disable CA1416 // Validate platform compatibility
             byte[] bytes = security.GetSecurityDescriptorBinaryForm();
+#pragma warning restore CA1416 // Validate platform compatibility
             IntPtr lpSecurityDescriptor = Marshal.AllocHGlobal(bytes.Length);
             Marshal.Copy(bytes, 0, lpSecurityDescriptor, bytes.Length);
 

@@ -107,18 +107,30 @@ namespace Microsoft.Tools.TeamMate.Services
             string iconPath = TeamMateApplicationInfo.ApplicationIconPath;
             if (File.Exists(iconPath))
             {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey uninstallKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall"))
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
                     if (uninstallKey != null)
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         foreach (string subKeyName in uninstallKey.GetSubKeyNames())
+#pragma warning restore CA1416 // Validate platform compatibility
                         {
+#pragma warning disable CA1416 // Validate platform compatibility
                             using (RegistryKey subKey = uninstallKey.OpenSubKey(subKeyName, true))
+#pragma warning restore CA1416 // Validate platform compatibility
                             {
+#pragma warning disable CA1416 // Validate platform compatibility
                                 object displayName = subKey.GetValue("DisplayName") as string;
+#pragma warning restore CA1416 // Validate platform compatibility
                                 if (String.Equals(displayName, TeamMateApplicationInfo.ApplicationName))
                                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                                     subKey.SetValue("DisplayIcon", iconPath);
+#pragma warning restore CA1416 // Validate platform compatibility
                                     break;
                                 }
                             }

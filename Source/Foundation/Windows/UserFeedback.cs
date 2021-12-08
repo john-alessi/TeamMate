@@ -10,12 +10,20 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows
     {
         public static void PlayAlertSound()
         {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             SystemSounds.Beep.Play();
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static void PlayErrorSound()
         {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             SystemSounds.Hand.Play();
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static void ShowError(Exception e)

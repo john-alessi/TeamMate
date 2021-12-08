@@ -8,16 +8,36 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows
 {
     public static class SystemIcons
     {
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> application = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Application));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> asterisk = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Asterisk));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> error = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Error));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> exclamation = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Exclamation));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> hand = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Hand));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> information = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Information));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> question = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Question));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> shield = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Shield));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> warning = new Lazy<ImageSource>(() => Create(LegacySystemIcons.Warning));
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
         private static Lazy<ImageSource> winLogo = new Lazy<ImageSource>(() => Create(LegacySystemIcons.WinLogo));
+#pragma warning restore CA1416 // Validate platform compatibility
 
         public static ImageSource Application
         {

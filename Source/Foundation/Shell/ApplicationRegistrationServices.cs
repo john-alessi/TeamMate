@@ -23,31 +23,47 @@ namespace Microsoft.Tools.TeamMate.Foundation.Shell
             Assert.ParamIsNotNullOrEmpty(registryPath, "registryPath");
             Assert.ParamIsNotNullOrEmpty(appExeLocation, "appExeLocation");
 
+#pragma warning disable CA1416 // Validate platform compatibility
             RegistryKey currentUser = Registry.CurrentUser;
+#pragma warning restore CA1416 // Validate platform compatibility
 
             // Register with Default Programs
             string capabilitiesRegPath = string.Format(@"SOFTWARE\{0}\Capabilities", registryPath);
+#pragma warning disable CA1416 // Validate platform compatibility
             using (RegistryKey capabilities = currentUser.CreateSubKey(capabilitiesRegPath))
+#pragma warning restore CA1416 // Validate platform compatibility
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 capabilities.SetValue("ApplicationName", appName);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                 capabilities.SetValue("ApplicationDescription", description);
+#pragma warning restore CA1416 // Validate platform compatibility
 
                 if (fileTypes.Length > 0)
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     using (RegistryKey fileAssociationsKey = capabilities.CreateSubKey("FileAssociations"))
+#pragma warning restore CA1416 // Validate platform compatibility
                     {
                         foreach (FileTypeRegistration fileType in fileTypes)
                         {
                             string progId = CreateProgId(appName, fileType);
+#pragma warning disable CA1416 // Validate platform compatibility
                             fileAssociationsKey.SetValue(fileType.Extension, progId);
+#pragma warning restore CA1416 // Validate platform compatibility
                         }
                     }
                 }
             }
 
+#pragma warning disable CA1416 // Validate platform compatibility
             using (RegistryKey registeredApplicationsKey = currentUser.OpenSubKey(@"SOFTWARE\RegisteredApplications", true))
+#pragma warning restore CA1416 // Validate platform compatibility
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 registeredApplicationsKey.SetValue(appName, capabilitiesRegPath);
+#pragma warning restore CA1416 // Validate platform compatibility
             }
 
             // Register ProgIDs
@@ -55,28 +71,46 @@ namespace Microsoft.Tools.TeamMate.Foundation.Shell
             {
                 string progId = CreateProgId(appName, fileType);
                 string regPath = string.Format(@"SOFTWARE\Classes\{0}", progId);
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey extKey = currentUser.CreateSubKey(regPath))
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
                     if (!String.IsNullOrEmpty(fileType.Description))
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         extKey.SetValue(null, fileType.Description);
+#pragma warning restore CA1416 // Validate platform compatibility
                     }
 
+#pragma warning disable CA1416 // Validate platform compatibility
                     using (RegistryKey iconKey = extKey.CreateSubKey("DefaultIcon"))
+#pragma warning restore CA1416 // Validate platform compatibility
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         iconKey.SetValue(null, appExeLocation);
+#pragma warning restore CA1416 // Validate platform compatibility
                     }
 
+#pragma warning disable CA1416 // Validate platform compatibility
                     using (RegistryKey commandKey = extKey.CreateSubKey(@"shell\open\command"))
+#pragma warning restore CA1416 // Validate platform compatibility
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         commandKey.SetValue(null, string.Format("\"{0}\" \"%1\"", appExeLocation));
+#pragma warning restore CA1416 // Validate platform compatibility
                     }
                 }
 
                 string fileExtensionKeyPath = string.Format(@"SOFTWARE\Classes\{0}\OpenWithProgids", fileType.Extension);
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey fileExtensionKey = currentUser.CreateSubKey(fileExtensionKeyPath))
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                     fileExtensionKey.SetValue(progId, new byte[0], RegistryValueKind.Binary);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
                 }
             }
         }
@@ -104,23 +138,35 @@ namespace Microsoft.Tools.TeamMate.Foundation.Shell
             Assert.ParamIsNotNull(appName, "appName");
             Assert.ParamIsNotNull(registryPath, "registryPath");
 
+#pragma warning disable CA1416 // Validate platform compatibility
             RegistryKey currentUser = Registry.CurrentUser;
+#pragma warning restore CA1416 // Validate platform compatibility
             string capabilitiesRegPath = string.Format(@"SOFTWARE\{0}\Capabilities", registryPath);
+#pragma warning disable CA1416 // Validate platform compatibility
             currentUser.DeleteSubKeyTree(capabilitiesRegPath, false);
+#pragma warning restore CA1416 // Validate platform compatibility
 
+#pragma warning disable CA1416 // Validate platform compatibility
             using (RegistryKey registeredApplicationsKey = currentUser.OpenSubKey(@"SOFTWARE\RegisteredApplications", true))
+#pragma warning restore CA1416 // Validate platform compatibility
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 registeredApplicationsKey.DeleteValue(appName, false);
+#pragma warning restore CA1416 // Validate platform compatibility
             }
 
             foreach (string fileExtension in fileExtensions)
             {
                 string progId = String.Format("{0}{1}", appName, fileExtension);
                 string regPath = string.Format(@"SOFTWARE\Classes\{0}", progId);
+#pragma warning disable CA1416 // Validate platform compatibility
                 currentUser.DeleteSubKeyTree(regPath, false);
+#pragma warning restore CA1416 // Validate platform compatibility
 
                 string fileExtensionKeyPath = string.Format(@"SOFTWARE\Classes\{0}", fileExtension);
+#pragma warning disable CA1416 // Validate platform compatibility
                 currentUser.DeleteSubKeyTree(fileExtensionKeyPath, false);
+#pragma warning restore CA1416 // Validate platform compatibility
             }
         }
 
@@ -135,21 +181,31 @@ namespace Microsoft.Tools.TeamMate.Foundation.Shell
             Assert.ParamIsNotNull(appName, "appName");
             Assert.ParamIsNotNull(commandLine, "commandLine");
 
+#pragma warning disable CA1416 // Validate platform compatibility
             RegistryKey currentUser = Registry.CurrentUser;
+#pragma warning restore CA1416 // Validate platform compatibility
             if (runOnStartup)
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey runKey = currentUser.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"))
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     runKey.SetValue(appName, commandLine);
+#pragma warning restore CA1416 // Validate platform compatibility
                 }
             }
             else
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey runKey = currentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true))
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
                     if (runKey != null)
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         runKey.DeleteValue(appName, false);
+#pragma warning restore CA1416 // Validate platform compatibility
                     }
                 }
             }

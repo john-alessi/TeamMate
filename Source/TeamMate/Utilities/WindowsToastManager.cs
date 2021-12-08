@@ -7,8 +7,6 @@ namespace Microsoft.Tools.TeamMate.Utilities
 {
     public class WindowsToastManager : IToastManager
     {
-        public event EventHandler<ToastActivatedEventArgs> ToastActivated;
-
         private ToastNotificationManager toastNotificationManager;
 
         public WindowsToastManager()

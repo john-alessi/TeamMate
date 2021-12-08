@@ -15,13 +15,19 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
     {
         public static Cursor CursorFromBitmap(Bitmap bmp)
         {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             return CursorFromBitmap(bmp, bmp.Width / 2, bmp.Height / 2);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static Cursor CursorFromBitmap(Bitmap bmp, int xHotSpot, int yHotSpot)
         {
             ICONINFO iconInfo = new ICONINFO();
+#pragma warning disable CA1416 // Validate platform compatibility
             NativeMethods.GetIconInfo(bmp.GetHicon(), ref iconInfo);
+#pragma warning restore CA1416 // Validate platform compatibility
             iconInfo.fIcon = false;
             iconInfo.xHotspot = xHotSpot;
             iconInfo.yHotspot = yHotSpot;
@@ -45,11 +51,31 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
         public static Bitmap BitmapFromBitmapSource(BitmapSource source)
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             var format = System.Drawing.Imaging.PixelFormat.Format32bppPArgb;
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             Bitmap bmp = new Bitmap(source.PixelWidth, source.PixelHeight, format);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             BitmapData data = bmp.LockBits(new Rectangle(System.Drawing.Point.Empty, bmp.Size), ImageLockMode.WriteOnly, format);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             source.CopyPixels(Int32Rect.Empty, data.Scan0, data.Height * data.Stride, data.Stride);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             bmp.UnlockBits(data);
+#pragma warning restore CA1416 // Validate platform compatibility
             return bmp;
         }
 
@@ -60,7 +86,11 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
             // TODO: Do we need to destroy the icon handle?
             Bitmap bitmap = BitmapFromBitmapSource(source);
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             return Icon.FromHandle(bitmap.GetHicon());
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static Icon IconFromWindowIcon(IntPtr hWnd, WindowIconType type)
@@ -77,7 +107,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
             {
                 try
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     icon = Icon.FromHandle(iconHandle);
+#pragma warning restore CA1416 // Validate platform compatibility
                 }
                 finally
                 {
@@ -104,7 +136,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
         public static BitmapSource CreateBitmapSourceFromBitmap(Bitmap bitmap)
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             return CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static BitmapSource CreateBitmapSourceFromHBitmap(IntPtr hBitmap)
@@ -150,7 +184,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
                 case WindowIconType.SmallOrAny:
                     iconHandle = GetSmallWindowIcon(hwnd);
+#pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
                     if (iconHandle == null)
+#pragma warning restore CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
                     {
                         iconHandle = GetLargeWindowIcon(hwnd);
                     }
@@ -158,7 +194,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
                 case WindowIconType.LargeOrAny:
                     iconHandle = GetLargeWindowIcon(hwnd);
+#pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
                     if (iconHandle == null)
+#pragma warning restore CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
                     {
                         iconHandle = GetSmallWindowIcon(hwnd);
                     }
@@ -212,7 +250,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Interop
 
         public static BitmapSource CreateBitmapSourceFromIcon(Icon icon)
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             return (icon != null) ? CreateBitmapSourceFromHIconAndDispose(icon.Handle) : null;
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         public static BitmapSource CreateBitmapSourceFromHIconAndDispose(IntPtr iconHandle)
