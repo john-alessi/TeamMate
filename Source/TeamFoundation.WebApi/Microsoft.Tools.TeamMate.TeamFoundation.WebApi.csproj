@@ -1,84 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), Build\Microsoft.Tools.TeamMate.Settings.targets))\Build\Microsoft.Tools.TeamMate.Settings.targets" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{888E7687-95F8-4049-94DF-9DD3398B5592}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Tools.TeamMate.TeamFoundation.WebApi</RootNamespace>
-    <AssemblyName>Microsoft.Tools.TeamMate.TeamFoundation.WebApi</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-arm64-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot;win;win-x64</RuntimeIdentifiers>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>467;618</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
     <NoWarn>467;618</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="HttpClientExtensions.cs" />
-    <Compile Include="PagingUtilities.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PullRequests\PullRequestQuery.cs" />
-    <Compile Include="ReferenceLinksExtensions.cs" />
-    <Compile Include="ResourceLocationHttpClient.cs" />
-    <Compile Include="HyperlinkFactory.cs" />
-    <Compile Include="WorkItemTracking\WorkItemComparer.cs" />
-    <Compile Include="WorkItemTracking\WorkItemConstants.cs" />
-    <Compile Include="WorkItemTracking\WorkItemExtensions.cs" />
-    <Compile Include="WorkItemTracking\WorkItemHierarchy.cs" />
-    <Compile Include="WorkItemTracking\WorkItemHierarchyNode.cs" />
-    <Compile Include="WorkItemTracking\WorkItemIdentity.cs" />
-    <Compile Include="WorkItemTracking\WorkItemPaths.cs" />
-    <Compile Include="WorkItemTracking\WorkItemQuery.cs" />
-    <Compile Include="WorkItemTracking\WorkItemQueryBuilder.cs" />
-    <Compile Include="WorkItemTracking\WorkItemQueryExpandedResult.cs" />
-    <Compile Include="WorkItemTracking\WorkItemTrackingBatchHttpClient.cs" />
-    <Compile Include="WorkItemTracking\WorkItemTrackingExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
-      <Version>5.2.7</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="16.170.0" />
     <PackageReference Include="Microsoft.TeamFoundationServer.ExtendedClient">
       <Version>16.170.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Services.Client">
-      <Version>16.170.0</Version>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <Import Project="$(BuildScripts)\Microsoft.Tools.TeamMate.targets" />
 </Project>

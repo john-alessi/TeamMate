@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 
 namespace Microsoft.Tools.TeamMate.Foundation.Native
@@ -273,7 +274,6 @@ namespace Microsoft.Tools.TeamMate.Foundation.Native
             this.Close();
         }
 
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal void Close()
         {
             if ((this.hProcess != IntPtr.Zero) && (this.hProcess != INVALID_HANDLE_VALUE))
