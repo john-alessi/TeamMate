@@ -165,7 +165,9 @@ namespace Microsoft.Tools.TeamMate.Utilities
 
             if (sound != null)
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 sound.Play();
+#pragma warning restore CA1416 // Validate platform compatibility
             }
         }
 
@@ -178,7 +180,9 @@ namespace Microsoft.Tools.TeamMate.Utilities
                 if (this.notificationSound == null)
                 {
                     // Lazy load the default notification sound
+#pragma warning disable CA1416 // Validate platform compatibility
                     this.notificationSound = new SoundPlayer(TeamMateResources.NotificationSoundStream);
+#pragma warning restore CA1416 // Validate platform compatibility
                 }
 
                 return this.notificationSound;

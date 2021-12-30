@@ -181,7 +181,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Native
 
                 if (source != null)
                 {
+#pragma warning disable CA1416 // Validate platform compatibility
                     Marshal.ReleaseComObject(source);
+#pragma warning restore CA1416 // Validate platform compatibility
                     source = null;
                 }
 

@@ -318,7 +318,9 @@ namespace Microsoft.Tools.TeamMate.Services
             this.trayIcon.ContextMenuStrip.Items.Add(new System.Windows.Forms.ToolStripSeparator());
             this.openMenuItem = AddMenuItemToTrayIcon(this.trayIcon, null, this.ShowMainWindow);
 
+#pragma warning disable CA1416 // Validate platform compatibility
             this.openMenuItem.Font = new System.Drawing.Font(this.openMenuItem.Font, System.Drawing.FontStyle.Bold);
+#pragma warning restore CA1416 // Validate platform compatibility
             this.openMenuItem.Text = "&Open";
 
             this.exitMenuItem = AddMenuItemToTrayIcon(this.trayIcon, TeamMateCommands.Exit, () => this.WindowService.RequestShutdown());

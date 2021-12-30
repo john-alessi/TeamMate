@@ -189,10 +189,6 @@ namespace Microsoft.Tools.TeamMate.Foundation.Windows.Controls
 
             // Draw the hint text on top of the control
             FontStyle fontStyle = HintTextFontStyle;
-            if (fontStyle == null)
-            {
-                fontStyle = control.FontStyle;
-            }
 
             FormattedText text = new FormattedText(hintText, uiCulture, control.FlowDirection,
                     new Typeface(control.FontFamily, fontStyle, control.FontWeight, control.FontStretch),

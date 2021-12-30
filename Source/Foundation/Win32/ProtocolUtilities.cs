@@ -29,11 +29,17 @@ namespace Microsoft.Tools.TeamMate.Foundation.Win32
 
             try
             {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                 using (RegistryKey classKey = Registry.ClassesRoot.OpenSubKey(protocol))
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
                 {
                     if (classKey != null)
                     {
+#pragma warning disable CA1416 // Validate platform compatibility
                         var urlProtocolValue = classKey.GetValue("URL Protocol") as string;
+#pragma warning restore CA1416 // Validate platform compatibility
 
                         if ((urlProtocolValue != null) && string.IsNullOrWhiteSpace(urlProtocolValue))
                         {

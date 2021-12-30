@@ -71,16 +71,9 @@ namespace Microsoft.Tools.TeamMate.Services
                 this.toastManager = null;
             }
 
-            if (Environment.OSVersion.IsWindows10OrGreater() && !this.SettingsService.DeveloperSettings.ForceLegacyNotifications)
-            {
-                this.toastManager = new WindowsToastManager();
-            }
-            else
-            {
-                var dispatcher = this.UIService.Dispatcher;
-                var settingsService = this.SettingsService;
-                this.toastManager = new CustomToastManager(dispatcher, settingsService);
-            }
+            var dispatcher = this.UIService.Dispatcher;
+            var settingsService = this.SettingsService;
+            this.toastManager = new CustomToastManager(dispatcher, settingsService);
 
             this.toastManager.ToastActivated += ToastManager_ToastActivated;
         }

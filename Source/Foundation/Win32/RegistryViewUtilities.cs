@@ -14,7 +14,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Win32
         /// </summary>
         public static IEnumerable<RegistryKey> OpenAllClassesRootKeys()
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             return OpenBaseKeys(RegistryHive.ClassesRoot);
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         /// <summary>
@@ -22,7 +24,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Win32
         /// </summary>
         public static IEnumerable<RegistryKey> OpenAllCurrentUserKeys()
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             return OpenBaseKeys(RegistryHive.CurrentUser);
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         /// <summary>
@@ -30,7 +34,9 @@ namespace Microsoft.Tools.TeamMate.Foundation.Win32
         /// </summary>
         public static IEnumerable<RegistryKey> OpenAllLocalMachineKeys()
         {
+#pragma warning disable CA1416 // Validate platform compatibility
             return OpenBaseKeys(RegistryHive.LocalMachine);
+#pragma warning restore CA1416 // Validate platform compatibility
         }
 
         /// <summary>
@@ -41,14 +47,26 @@ namespace Microsoft.Tools.TeamMate.Foundation.Win32
         {
             if (Environment.Is64BitProcess)
             {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                 yield return RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
             }
             else if (Environment.Is64BitOperatingSystem)
             {
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
                 yield return RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
             }
 
+#pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA1416 // Validate platform compatibility
             yield return RegistryKey.OpenBaseKey(hive, RegistryView.Registry32);
+#pragma warning restore CA1416 // Validate platform compatibility
+#pragma warning restore CA1416 // Validate platform compatibility
         }
     }
 }
