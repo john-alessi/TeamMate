@@ -45,7 +45,8 @@ namespace Microsoft.Tools.TeamMate.Services
             credentials.Storage = GetVssClientCredentialStorage(86400);
 
             var settings = new VssClientHttpRequestSettings();
-            settings.AllowAutoRedirect = true;
+            // TODO(MEM)
+           // settings.AllowAutoRedirect = true;
 
             VssConnection connection = new VssConnection(projectCollectionUri, credentials, settings);
             using (Log.PerformanceBlock("Authenticating with collection at {0}", projectCollectionUri))
